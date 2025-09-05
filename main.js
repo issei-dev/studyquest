@@ -138,9 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 todayStamps.push(newStamp);
                 appData.stamps[today] = todayStamps;
 
-                appData.totalPoints += 300;
+                appData.totalPoints += 100;
                 
-                alert(`スタンプを押しました！300ポイント獲得！\n「${stampText}」を記録しました。`);
+                alert(`スタンプを押しました！100ポイント獲得！\n「${stampText}」を記録しました。`);
                 
                 stampInputEl.value = '';
                 inputSectionEl.style.display = 'none';
@@ -167,21 +167,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClose = document.getElementsByClassName('modal-close')[0];
 
     function initializeCharacterPage() {
+        // キャラクターのレベルをリセットする新しいロジック
         loadData();
-        if (appData.characters.length < 3) {
-            const existingCharacterIds = appData.characters.map(c => c.id);
-            for (let i = 1; i <= 3; i++) {
-                if (!existingCharacterIds.includes(i)) {
-                    appData.characters.push({
-                        id: i,
-                        level: 1,
-                        evolutionIndex: 0
-                    });
-                    break;
-                }
+        const existingCharacterIds = appData.characters.map(c => c.id);
+        const charactersToKeep = [];
+
+        // 既存のキャラクターのレベルと進化段階をリセット
+        for (const char of appData.characters) {
+            if (CHARACTER_MASTER_DATA[char.id]) {
+                charactersToKeep.push({
+                    id: char.id,
+                    level: 1, // ここでレベルを1に戻す
+                    evolutionIndex: 0 // 進化段階もリセット
+                });
             }
-            saveData();
         }
+        appData.characters = charactersToKeep;
+
+        // キャラクターがまだ3体いない場合は追加
+        if (appData.characters.length < 3) {
+            const newCharacterIds = [1, 2, 3].filter(id => !existingCharacterIds.includes(id));
+            newCharacterIds.forEach(id => {
+                appData.characters.push({
+                    id: id,
+                    level: 1,
+                    evolutionIndex: 0
+                });
+            });
+        }
+
+        saveData();
         updatePointDisplay();
         renderCharacters();
     }
