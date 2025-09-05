@@ -389,6 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 初期化処理 ---
     loadData();
+    appData.stamps = {}; // この行を追加しました
+    saveData(); // この行を追加しました
     initializeStampPage();
     showPage('stamp');
 });
