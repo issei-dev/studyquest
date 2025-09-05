@@ -9,23 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const CHARACTER_MASTER_DATA = {
         1: {
             evolutions: [
-                { name: "ひよこナイト", image: "images-n001.png", rank: "Normal", initialAttack: 10, maxLevel: 30 },
-                { name: "にわとり騎士", image: "images/niwatori_knight.png", rank: "Rare", initialAttack: 25, maxLevel: 50 },
-                { name: "イーグルライダー", image: "images/eagle_rider.png", rank: "Super Rare", initialAttack: 50, maxLevel: 75 },
+                { name: "コドラン", image: "images-001a.png", rank: "Normal", initialAttack: 10, maxLevel: 20 },
+                { name: "フレイムドラゴン", image: "images-001b.png", rank: "Rare", initialAttack: 25, maxLevel: 30 },
+                { name: "インフェルノドラゴ", image: "images-001c.png", rank: "Super Rare", initialAttack: 80, maxLevel: 50 },
             ]
         },
         2: {
             evolutions: [
-                { name: "みならい魔法使い", image: "images-sr001.png", rank: "Normal", initialAttack: 15, maxLevel: 30 },
-                { name: "一人前の魔導士", image: "images/ichininmae_madoushi.png", rank: "Super Rare", initialAttack: 40, maxLevel: 75 },
-                { name: "大賢者", image: "images/daikenja.png", rank: "Ultimate Rare", initialAttack: 80, maxLevel: 99 },
+                { name: "プティスカル", image: "images-002a.png", rank: "Normal", initialAttack: 8, maxLevel: 20 },
+                { name: "デスボーン", image: "images-002b.png", rank: "Rare", initialAttack: 30, maxLevel: 30 },
+                { name: "ナイトメアボーン", image: "images-002c.png", rank: "Super Rare", initialAttack: 80, maxLevel: 50 },
             ]
         },
         3: {
             evolutions: [
-                { name: "ちびドラゴン", image: "images-sr003.png", rank: "Normal", initialAttack: 20, maxLevel: 30 },
-                { name: "ファイヤードラゴン", image: "images/fire_dragon.png", rank: "Rare", initialAttack: 50, maxLevel: 60 },
-                { name: "レジェンドドラゴン", image: "images/legend_dragon.png", rank: "Legend", initialAttack: 100, maxLevel: 99 },
+                { name: "ミストル", image: "images-003a.png", rank: "Rare", initialAttack: 20, maxLevel: 30 },
+                { name: "アクアソーサラー", image: "images-003b.png", rank: "Super Rare", initialAttack: 65, maxLevel: 50},
+                
             ]
         }
     };
