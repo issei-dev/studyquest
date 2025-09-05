@@ -138,9 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 todayStamps.push(newStamp);
                 appData.stamps[today] = todayStamps;
 
-                appData.totalPoints += 100;
+                appData.totalPoints += 300;
                 
-                alert(`スタンプを押しました！100ポイント獲得！\n「${stampText}」を記録しました。`);
+                alert(`スタンプを押しました！300ポイント獲得！\n「${stampText}」を記録しました。`);
                 
                 stampInputEl.value = '';
                 inputSectionEl.style.display = 'none';
