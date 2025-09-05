@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学習アプリ</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="point-display">
+            所持ポイント: <span id="totalPointsDisplay_stamp">0</span> P
+        </div>
+    </header>
+
+    <main>
+        <div id="stamp" class="page active-page">
+            <h2>スタンプ</h2>
+            <div class="card">
+                <p id="todayDate"></p>
+                <div id="stampContainer" class="stamp-section">
+                    <button class="main-button">今日のスタンプ</button>
+                </div>
+                <div id="inputSection" class="input-section" style="display:none;">
+                    <p id="stampMessage"></p>
+                    <input type="text" id="stampInput" placeholder="今日やったことを入力">
+                    <button id="completeStampButton" class="main-button">完了</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="characters" class="page">
+            <h2>キャラクター</h2>
+            <div class="point-display">
+                所持ポイント: <span id="totalPointsDisplay_characters">0</span> P
+            </div>
+            <div class="card">
+                <h3>キャラクター一覧</h3>
+                <div id="characterListContainer" class="character-list"></div>
+                <p id="characterHint" class="hint-message"></p>
+                <div class="total-stats">
+                    合計攻撃力: <span id="totalAttackPower">0</span>
+                    合計キャラクター数: <span id="totalCharacterCount">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="calendar" class="page">
+            <h2>カレンダー</h2>
+            <div class="card">
+                <div class="calendar-header">
+                    <button id="prevMonthBtn" class="calendar-nav-btn">&lt;</button>
+                    <h3 id="currentMonthYear"></h3>
+                    <button id="nextMonthBtn" class="calendar-nav-btn">&gt;</button>
+                </div>
+                <div class="calendar-weekdays">
+                    <span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav class="nav-menu">
+            <ul>
+                <li class="nav-item active" data-page="stamp">
+                    <a href="#">
+                        <span class="icon">📝</span>
+                        <span>スタンプ</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="characters">
+                    <a href="#">
+                        <span class="icon">🐣</span>
+                        <span>キャラクター</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="calendar">
+                    <a href="#">
+                        <span class="icon">📅</span>
+                        <span>カレンダー</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+
+    <div id="image-modal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="expanded-image" src="" alt="">
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
