@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 10;
+            const requiredPoints = (charData.level + 1) * 5;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const requiredEvolvePoints = 500;
