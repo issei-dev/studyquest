@@ -288,10 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!characterToUpdate) return;
         
-        const requiredEvolvePoints = 500;
-        if (appData.totalPoints < requiredEvolvePoints) {
-            alert('進化に必要なポイントが足りません！');
-            return;
+    
         }
 
         const master = CHARACTER_MASTER_DATA[characterToUpdate.id];
