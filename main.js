@@ -216,8 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${!isMaxLevel ? `<p>次のレベルまで: ${requiredPoints} P</p>` : `<p>この形態は最大レベルです！</p>`}
                 
                 ${isMaxLevel && master.evolutions[charData.evolutionIndex + 1]
-                    ? `<button class="evolve-button" data-character-id="${charData.id}" ${canEvolve ? '' : 'disabled'}>進化する！(${requiredEvolvePoints}P)</button>`
-                    : `<button class="level-up-button" data-character-id="${charData.id}" ${canLevelUp ? '' : 'disabled'}>レベルアップ！</button>`
+    ? `<button class="evolve-button" data-character-id="${charData.id}" ${canEvolve ? '' : 'disabled'}>進化する！</button>`
+    : `<button class="level-up-button" data-character-id="${charData.id}" ${canLevelUp ? '' : 'disabled'}>レベルアップ！</button>`
+}
                 }
             `;
             characterListContainerEl.appendChild(card);
