@@ -228,11 +228,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (characterToUpdate.level + 1) * 10;
+            
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const canEvolve = isMaxLevel;
 
+　　　　　　　const requiredPoints = (charData.level + 1) * 10;
+            
             const card = document.createElement('div');
             card.className = 'card character-card';
             card.innerHTML = `
