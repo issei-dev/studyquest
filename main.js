@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const todayStamps = appData.stamps[today] || [];
         const stampedCountToday = todayStamps.length;
 
-        if (stampedCountToday >= 5) {
+        if (stampedCountToday >= 10) {
             stampContainerEl.innerHTML = '<p>今日のスタンプは満タンです！</p>';
             inputSectionEl.style.display = 'none';
             return;
@@ -171,14 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toISOString().split('T')[0];
             const todayStamps = appData.stamps[today] || [];
             
-            if (todayStamps.length < 5) {
+            if (todayStamps.length < 10) {
                 const newStamp = { text: stampText };
                 todayStamps.push(newStamp);
                 appData.stamps[today] = todayStamps;
 
-                appData.totalPoints += 100;
+                appData.totalPoints += 300;
                 
-                alert(`スタンプを押しました！100ポイント獲得！\n「${stampText}」を記録しました。`);
+                alert(`スタンプを押しました！300ポイント獲得！\n「${stampText}」を記録しました。`);
                 
                 stampInputEl.value = '';
                 inputSectionEl.style.display = 'none';
