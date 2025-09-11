@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 5;
+            const requiredPoints = (charData.level + 1) * 58;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const canEvolve = isMaxLevel;
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleLevelUpClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
-        const requiredPoints = (characterToUpdate.level + 1) * 5;
+        const requiredPoints = (characterToUpdate.level + 1) * 58;
         
         if (appData.totalPoints >= requiredPoints) {
             appData.totalPoints -= requiredPoints;
@@ -314,6 +314,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
         
         if (master.evolutions[nextEvolutionIndex]) {
+            // 進化エフェクトの適用と解除
+            const characterImage = event.target.closest('.character-card').querySelector('img');
+            if (characterImage) {
+                characterImage.classList.add('evolve-effect');
+                // アニメーション終了後にクラスを削除
+                characterImage.addEventListener('animationend', function handler() {
+                    characterImage.classList.remove('evolve-effect');
+                    characterImage.removeEventListener('animationend', handler);
+                    
+                    // アニメーション後にキャラクターの見た目を更新するためにrenderCharactersを呼び出す
+                    renderCharacters();
+                });
+            }
+
             characterToUpdate.evolutionIndex = nextEvolutionIndex;
             characterToUpdate.level = 1;
             
@@ -321,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             saveData();
             updatePointDisplay();
-            renderCharacters();
         } else {
             alert('このキャラクターはこれ以上進化できません！');
         }
@@ -336,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (appData.boss.lastAttackDate !== today) {
             appData.boss.attacksLeftToday = 3;
             appData.boss.lastAttackDate = today;
+            saveData();
         }
 
         const currentBossData = BOSS_MASTER_DATA[appData.boss.currentStage];
@@ -436,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveData();
         updatePointDisplay();
         clearMessageEl.textContent = `げきはせいこう！${reward}ポイントゲット！🎉`;
-        clearRewardEl.textContent = ''; // 報酬メッセージをクリア
+        clearRewardEl.textContent = '';
         clearModalEl.style.display = 'flex';
     }
 
