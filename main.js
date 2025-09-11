@@ -177,9 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 todayStamps.push(newStamp);
                 appData.stamps[today] = todayStamps;
 
-                appData.totalPoints += 100;
+                appData.totalPoints += 300;
                 
-                alert(`スタンプを押しました！100ポイント獲得！\n「${stampText}」を記録しました。`);
+                alert(`スタンプを押しました！300ポイント獲得！\n「${stampText}」を記録しました。`);
                 
                 stampInputEl.value = '';
                 inputSectionEl.style.display = 'none';
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 10;
+            const requiredPoints = (charData.level + 1) * 5;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const canEvolve = isMaxLevel;
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleLevelUpClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
-        const requiredPoints = (characterToUpdate.level + 1) * 10;
+        const requiredPoints = (characterToUpdate.level + 1) * 5;
         
         if (appData.totalPoints >= requiredPoints) {
             appData.totalPoints -= requiredPoints;
