@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const BOSS_MASTER_DATA = {
-        1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 5000 },
-        2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 3000, rewardPoints: 10000 },
-        3: { name: "オーガ", image: "images/boss_ogre.png", maxHp: 5000, rewardPoints: 2000 },
-    };
+   const BOSS_MASTER_DATA = {
+    1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 5000 },
+    2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 3000, rewardPoints: 10000 },
+    3: { name: "オーガ", image: "boss_ogre.png", maxHp: 5000, rewardPoints: 2000 },
+};
 
     // DOM要素のキャッシュ
     const navLinks = document.querySelectorAll('.nav-menu a');
