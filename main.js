@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         boss: {
             currentStage: 1,
             lastAttackDate: null,
-            currentHp: 0
+            currentHp: 0,
+            attacksLeftToday: 3 // 新しいプロパティを追加
         }
     };
 
@@ -228,13 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            
+            const requiredPoints = (charData.level + 1) * 10;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const canEvolve = isMaxLevel;
 
-　　　　　　　const requiredPoints = (charData.level + 1) * 10;
-            
             const card = document.createElement('div');
             card.className = 'card character-card';
             card.innerHTML = `
@@ -331,6 +330,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- ページ3: ボス機能 ---
     function initializeBossPage() {
         loadData();
+        const today = new Date().toISOString().split('T')[0];
+
+        // 日付が変わったら攻撃回数をリセット
+        if (appData.boss.lastAttackDate !== today) {
+            appData.boss.attacksLeftToday = 3;
+            appData.boss.lastAttackDate = today;
+        }
+
         const currentBossData = BOSS_MASTER_DATA[appData.boss.currentStage];
         if (!currentBossData) {
             bossImageEl.src = '';
@@ -378,15 +385,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkAttackButtonState() {
-        const today = new Date().toISOString().split('T')[0];
-        if (appData.boss.lastAttackDate === today) {
+        if (appData.boss.attacksLeftToday <= 0) {
             attackButtonEl.disabled = true;
             attackButtonEl.textContent = '今日の攻撃は終了しました';
-            attackMessageEl.textContent = '次の攻撃は明日になります。';
+            attackMessageEl.textContent = `今日の攻撃回数：0 / 3`;
         } else {
             attackButtonEl.disabled = false;
             attackButtonEl.textContent = '攻撃！';
-            attackMessageEl.textContent = '1日1回攻撃できます！';
+            attackMessageEl.textContent = `今日の攻撃回数：${appData.boss.attacksLeftToday} / 3`;
         }
     }
     
@@ -397,22 +403,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // ボス画像の揺れアニメーション
         bossImageEl.classList.add('shake');
         
-        // ダメージ計算
+        // ダメージ計算と攻撃回数の消費
         appData.boss.currentHp -= totalAttack;
+        appData.boss.attacksLeftToday--;
+
         if (appData.boss.currentHp < 0) {
             appData.boss.currentHp = 0;
         }
-        
-        // 最終攻撃日の記録
-        const today = new Date().toISOString().split('T')[0];
-        appData.boss.lastAttackDate = today;
 
         // データ保存とUI更新
         saveData();
         renderBossStatus();
         checkAttackButtonState();
-
-        attackMessageEl.textContent = `${totalAttack}のダメージを与えた！`;
 
         // アニメーション終了後にクラスを削除
         bossImageEl.addEventListener('animationend', () => {
@@ -424,6 +426,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 showClearModal(currentBossData.rewardPoints);
             }, 500);
+        } else {
+            alert(`${totalAttack}のダメージを与えた！`);
         }
     });
 
@@ -431,14 +435,14 @@ document.addEventListener('DOMContentLoaded', () => {
         appData.totalPoints += reward;
         saveData();
         updatePointDisplay();
-        clearMessageEl.textContent = 'ステージクリア！🎉';
-        clearRewardEl.textContent = `${reward}Pを獲得しました！`;
+        clearMessageEl.textContent = `げきはせいこう！${reward}ポイントゲット！🎉`;
+        clearRewardEl.textContent = ''; // 報酬メッセージをクリア
         clearModalEl.style.display = 'flex';
     }
 
     nextStageButtonEl.addEventListener('click', () => {
         appData.boss.currentStage++;
-        appData.boss.currentHp = 0; // 次のステージのHPが初期化されるように設定
+        appData.boss.currentHp = 0;
         saveData();
         clearModalEl.style.display = 'none';
         initializeBossPage();
