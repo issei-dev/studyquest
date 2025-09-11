@@ -176,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 todayStamps.push(newStamp);
                 appData.stamps[today] = todayStamps;
 
-                appData.totalPoints += 300;
+                appData.totalPoints += 100;
                 
-                alert(`スタンプを押しました！300ポイント獲得！\n「${stampText}」を記録しました。`);
+                alert(`スタンプを押しました！100ポイント獲得！\n「${stampText}」を記録しました。`);
                 
                 stampInputEl.value = '';
                 inputSectionEl.style.display = 'none';
@@ -228,10 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 10;
+            const requiredPoints = (characterToUpdate.level + 1) * 10;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
-            // 進化にポイントが必要ないように変更
             const canEvolve = isMaxLevel;
 
             const card = document.createElement('div');
@@ -288,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLevelUpClick(event) {
-        const charId = parseInt(event.target.dataset.character-id, 10);
+        const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
         const requiredPoints = (characterToUpdate.level + 1) * 10;
         
@@ -458,4 +457,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstDayOfMonth = new Date(year, month, 1);
         const lastDayOfMonth = new Date(year, month + 1, 0);
         const startDate = new Date(firstDayOfMonth);
-        startDate.setDate(firstDayOfMonth.getDate() - firstDayOfMonth
+        startDate.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
+        
+        let day = new Date(startDate);
+        while (day <= lastDayOfMonth || day.getDay() !== 0) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'calendar-day';
+            if (day.getMonth() !== month) {
+                dayEl.classList.add('not-current-month');
+            }
+
+            const dayNumberEl = document.createElement('div');
+            dayNumberEl.className = 'day-number';
+            dayNumberEl.textContent = day.getDate();
+            dayEl.appendChild(dayNumberEl);
+
+            const formattedDate = day.toISOString().split('T')[0];
+            const stampsForDay = appData.stamps[formattedDate] || [];
+            stampsForDay.forEach(stamp => {
+                const stampItemEl = document.createElement('div');
+                stampItemEl.className = 'stamp-item';
+                stampItemEl.textContent = stamp.text;
+                dayEl.appendChild(stampItemEl);
+            });
+
+            calendarGridEl.appendChild(dayEl);
+            day.setDate(day.getDate() + 1);
+        }
+    }
+
+    prevMonthBtn.addEventListener('click', () => {
+        currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+        renderCalendar(currentCalendarDate);
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+        currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+        renderCalendar(currentCalendarDate);
+    });
+
+    // --- 初期化処理 ---
+    loadData();
+    initializeStampPage();
+    showPage('stamp');
+});
