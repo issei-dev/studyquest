@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let appData = {
         totalPoints: 0,
         characters: [],
-        stamps: {}
+        stamps: {},
+        boss: {
+            currentStage: 1,
+            lastAttackDate: null,
+            currentHp: 0
+        }
     };
 
     const CHARACTER_MASTER_DATA = {
@@ -25,12 +30,55 @@ document.addEventListener('DOMContentLoaded', () => {
             evolutions: [
                 { name: "ミストル", image: "images-003a.png", rank: "Rare", initialAttack: 20, maxLevel: 30 },
                 { name: "アクアソーサラー", image: "images-003b.png", rank: "Super Rare", initialAttack: 65, maxLevel: 50},
-                
             ]
         }
     };
 
-     function saveData() {
+    const BOSS_MASTER_DATA = {
+        1: { name: "ゴブリン", image: "images/boss_goblin.png", maxHp: 1000, rewardPoints: 500 },
+        2: { name: "巨大スライム", image: "images/boss_slime.png", maxHp: 2500, rewardPoints: 1000 },
+        3: { name: "オーガ", image: "images/boss_ogre.png", maxHp: 5000, rewardPoints: 2000 },
+    };
+
+    // DOM要素のキャッシュ
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    const pages = document.querySelectorAll('.page');
+    const totalPointsDisplay_stamp = document.getElementById('totalPointsDisplay_stamp');
+    const totalPointsDisplay_characters = document.getElementById('totalPointsDisplay_characters');
+    const todayDateEl = document.getElementById('todayDate');
+    const stampContainerEl = document.getElementById('stampContainer');
+    const stampInputEl = document.getElementById('stampInput');
+    const completeStampButtonEl = document.getElementById('completeStampButton');
+    const inputSectionEl = document.getElementById('inputSection');
+    const stampMessageEl = document.getElementById('stampMessage');
+    const characterListContainerEl = document.getElementById('characterListContainer');
+    const characterHintEl = document.getElementById('characterHint');
+    const totalAttackPowerEl = document.getElementById('totalAttackPower');
+    const totalCharacterCountEl = document.getElementById('totalCharacterCount');
+    const imageModal = document.getElementById('image-modal');
+    const expandedImage = document.getElementById('expanded-image');
+    const modalClose = document.getElementsByClassName('modal-close')[0];
+    const currentMonthYearEl = document.getElementById('currentMonthYear');
+    const prevMonthBtn = document.getElementById('prevMonthBtn');
+    const nextMonthBtn = document.getElementById('nextMonthBtn');
+    const calendarGridEl = document.getElementById('calendarGrid');
+    let currentCalendarDate = new Date();
+    
+    // ボス関連の要素
+    const stageNameEl = document.getElementById('stageName');
+    const bossNameEl = document.getElementById('bossName');
+    const bossImageEl = document.getElementById('bossImage');
+    const bossCurrentHpEl = document.getElementById('bossCurrentHp');
+    const bossMaxHpEl = document.getElementById('bossMaxHp');
+    const healthFillEl = document.getElementById('healthFill');
+    const attackButtonEl = document.getElementById('attackButton');
+    const attackMessageEl = document.getElementById('attackMessage');
+    const clearModalEl = document.getElementById('clear-modal');
+    const clearMessageEl = document.getElementById('clearMessage');
+    const clearRewardEl = document.getElementById('clearReward');
+    const nextStageButtonEl = document.getElementById('nextStageButton');
+
+    function saveData() {
         localStorage.setItem('studyApp', JSON.stringify(appData));
     }
 
@@ -42,9 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- ページ切り替えのロジック ---
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    const pages = document.querySelectorAll('.page');
-
     function showPage(pageId) {
         pages.forEach(page => page.classList.remove('active-page'));
         document.getElementById(pageId).classList.add('active-page');
@@ -63,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 initializeStampPage();
             } else if (targetPageId === 'characters') {
                 initializeCharacterPage();
+            } else if (targetPageId === 'boss') {
+                initializeBossPage();
             } else if (targetPageId === 'calendar') {
                 initializeCalendarPage();
             }
@@ -70,13 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- ページ1: スタンプ機能 ---
-    const todayDateEl = document.getElementById('todayDate');
-    const stampContainerEl = document.getElementById('stampContainer');
-    const stampInputEl = document.getElementById('stampInput');
-    const completeStampButtonEl = document.getElementById('completeStampButton');
-    const inputSectionEl = document.getElementById('inputSection');
-    const stampMessageEl = document.getElementById('stampMessage');
-
     function initializeStampPage() {
         const today = new Date().toISOString().split('T')[0];
         todayDateEl.textContent = today;
@@ -85,8 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updatePointDisplay() {
-        const totalPointsDisplay_stamp = document.getElementById('totalPointsDisplay_stamp');
-        const totalPointsDisplay_characters = document.getElementById('totalPointsDisplay_characters');
         if(totalPointsDisplay_stamp) totalPointsDisplay_stamp.textContent = appData.totalPoints;
         if(totalPointsDisplay_characters) totalPointsDisplay_characters.textContent = appData.totalPoints;
     }
@@ -138,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 todayStamps.push(newStamp);
                 appData.stamps[today] = todayStamps;
 
-                appData.totalPoints += 300;
+                appData.totalPoints += 100;
                 
-                alert(`スタンプを押しました！300ポイント獲得！\n「${stampText}」を記録しました。`);
+                alert(`スタンプを押しました！100ポイント獲得！\n「${stampText}」を記録しました。`);
                 
                 stampInputEl.value = '';
                 inputSectionEl.style.display = 'none';
@@ -156,16 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- ページ2: キャラクター機能 ---
-    const characterListContainerEl = document.getElementById('characterListContainer');
-    const characterHintEl = document.getElementById('characterHint');
-    const totalAttackPowerEl = document.getElementById('totalAttackPower');
-    const totalCharacterCountEl = document.getElementById('totalCharacterCount');
-
-    // ポップアップ関連の要素を取得
-    const imageModal = document.getElementById('image-modal');
-    const expandedImage = document.getElementById('expanded-image');
-    const modalClose = document.getElementsByClassName('modal-close')[0];
-
     function initializeCharacterPage() {
         loadData();
         const existingCharacterIds = appData.characters.map(c => c.id);
@@ -200,11 +228,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 5;
+            const requiredPoints = (charData.level + 1) * 10;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
-            const requiredEvolvePoints = 500;
-            const canEvolve = appData.totalPoints >= requiredEvolvePoints;
+            // 進化にポイントが必要ないように変更
+            const canEvolve = isMaxLevel;
 
             const card = document.createElement('div');
             card.className = 'card character-card';
@@ -216,9 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${!isMaxLevel ? `<p>次のレベルまで: ${requiredPoints} P</p>` : `<p>この形態は最大レベルです！</p>`}
                 
                 ${isMaxLevel && master.evolutions[charData.evolutionIndex + 1]
-    ? `<button class="evolve-button" data-character-id="${charData.id}" ${canEvolve ? '' : 'disabled'}>進化する！</button>`
-    : `<button class="level-up-button" data-character-id="${charData.id}" ${canLevelUp ? '' : 'disabled'}>レベルアップ！</button>`
-}
+                    ? `<button class="evolve-button" data-character-id="${charData.id}" ${canEvolve ? '' : 'disabled'}>進化する！</button>`
+                    : `<button class="level-up-button" data-character-id="${charData.id}" ${canLevelUp ? '' : 'disabled'}>レベルアップ！</button>`
                 }
             `;
             characterListContainerEl.appendChild(card);
@@ -227,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
         totalAttackPowerEl.textContent = totalAttackPower;
         totalCharacterCountEl.textContent = appData.characters.length;
 
-        // イベントリスナーを再設定
         document.querySelectorAll('.level-up-button').forEach(button => {
             button.addEventListener('click', handleLevelUpClick);
         });
@@ -235,11 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', handleEvolveClick);
         });
         
-        // 画像にクリックイベントリスナーを追加
         document.querySelectorAll('.character-card img').forEach(image => {
             image.addEventListener('click', handleImageClick);
         });
-
 
         if (appData.characters.length < 3) {
             characterHintEl.textContent = 'キャラクターを30レベルにすると、新しいキャラクターが追加できます！';
@@ -248,13 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 画像クリック時の処理
     function handleImageClick(event) {
         expandedImage.src = event.target.src;
         imageModal.style.display = 'flex';
     }
 
-    // ポップアップを閉じる処理
     modalClose.onclick = () => {
         imageModal.style.display = 'none';
     }
@@ -266,9 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLevelUpClick(event) {
-        const charId = parseInt(event.target.dataset.characterId, 10);
+        const charId = parseInt(event.target.dataset.character-id, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
-        
         const requiredPoints = (characterToUpdate.level + 1) * 10;
         
         if (appData.totalPoints >= requiredPoints) {
@@ -289,14 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!characterToUpdate) return;
         
-    
-        }
-
         const master = CHARACTER_MASTER_DATA[characterToUpdate.id];
         const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
         
         if (master.evolutions[nextEvolutionIndex]) {
-            appData.totalPoints -= requiredEvolvePoints;
             characterToUpdate.evolutionIndex = nextEvolutionIndex;
             characterToUpdate.level = 1;
             
@@ -310,13 +327,123 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- ページ3: カレンダー機能 ---
-    const currentMonthYearEl = document.getElementById('currentMonthYear');
-    const prevMonthBtn = document.getElementById('prevMonthBtn');
-    const nextMonthBtn = document.getElementById('nextMonthBtn');
-    const calendarGridEl = document.getElementById('calendarGrid');
-    let currentCalendarDate = new Date();
+    // --- ページ3: ボス機能 ---
+    function initializeBossPage() {
+        loadData();
+        const currentBossData = BOSS_MASTER_DATA[appData.boss.currentStage];
+        if (!currentBossData) {
+            bossImageEl.src = '';
+            stageNameEl.textContent = '全ステージクリア！';
+            bossNameEl.textContent = '新しいボスを待て！';
+            attackButtonEl.disabled = true;
+            attackButtonEl.textContent = '完了';
+            attackMessageEl.textContent = 'おめでとうございます！すべてのボスを撃破しました！';
+            healthFillEl.style.width = '0%';
+            bossCurrentHpEl.textContent = '0';
+            bossMaxHpEl.textContent = '0';
+            return;
+        }
 
+        if (appData.boss.currentHp === 0) {
+            appData.boss.currentHp = currentBossData.maxHp;
+            saveData();
+        }
+        
+        renderBossStatus();
+        checkAttackButtonState();
+    }
+
+    function renderBossStatus() {
+        const currentBossData = BOSS_MASTER_DATA[appData.boss.currentStage];
+        if (!currentBossData) return;
+        
+        stageNameEl.textContent = `ステージ ${appData.boss.currentStage}`;
+        bossNameEl.textContent = `ボス: ${currentBossData.name}`;
+        bossImageEl.src = currentBossData.image;
+        bossMaxHpEl.textContent = currentBossData.maxHp;
+        bossCurrentHpEl.textContent = appData.boss.currentHp;
+        const hpPercentage = (appData.boss.currentHp / currentBossData.maxHp) * 100;
+        healthFillEl.style.width = `${hpPercentage}%`;
+    }
+
+    function calculateTotalAttackPower() {
+        let totalAttack = 0;
+        appData.characters.forEach(charData => {
+            const master = CHARACTER_MASTER_DATA[charData.id];
+            const currentEvolution = master.evolutions[charData.evolutionIndex];
+            totalAttack += currentEvolution.initialAttack * charData.level;
+        });
+        return totalAttack;
+    }
+
+    function checkAttackButtonState() {
+        const today = new Date().toISOString().split('T')[0];
+        if (appData.boss.lastAttackDate === today) {
+            attackButtonEl.disabled = true;
+            attackButtonEl.textContent = '今日の攻撃は終了しました';
+            attackMessageEl.textContent = '次の攻撃は明日になります。';
+        } else {
+            attackButtonEl.disabled = false;
+            attackButtonEl.textContent = '攻撃！';
+            attackMessageEl.textContent = '1日1回攻撃できます！';
+        }
+    }
+    
+    attackButtonEl.addEventListener('click', () => {
+        const totalAttack = calculateTotalAttackPower();
+        const currentBossData = BOSS_MASTER_DATA[appData.boss.currentStage];
+        
+        // ボス画像の揺れアニメーション
+        bossImageEl.classList.add('shake');
+        
+        // ダメージ計算
+        appData.boss.currentHp -= totalAttack;
+        if (appData.boss.currentHp < 0) {
+            appData.boss.currentHp = 0;
+        }
+        
+        // 最終攻撃日の記録
+        const today = new Date().toISOString().split('T')[0];
+        appData.boss.lastAttackDate = today;
+
+        // データ保存とUI更新
+        saveData();
+        renderBossStatus();
+        checkAttackButtonState();
+
+        attackMessageEl.textContent = `${totalAttack}のダメージを与えた！`;
+
+        // アニメーション終了後にクラスを削除
+        bossImageEl.addEventListener('animationend', () => {
+            bossImageEl.classList.remove('shake');
+        }, { once: true });
+
+        // HPが0になったかチェック
+        if (appData.boss.currentHp <= 0) {
+            setTimeout(() => {
+                showClearModal(currentBossData.rewardPoints);
+            }, 500);
+        }
+    });
+
+    function showClearModal(reward) {
+        appData.totalPoints += reward;
+        saveData();
+        updatePointDisplay();
+        clearMessageEl.textContent = 'ステージクリア！🎉';
+        clearRewardEl.textContent = `${reward}Pを獲得しました！`;
+        clearModalEl.style.display = 'flex';
+    }
+
+    nextStageButtonEl.addEventListener('click', () => {
+        appData.boss.currentStage++;
+        appData.boss.currentHp = 0; // 次のステージのHPが初期化されるように設定
+        saveData();
+        clearModalEl.style.display = 'none';
+        initializeBossPage();
+    });
+
+    // --- ページ4: カレンダー機能 ---
     function initializeCalendarPage() {
         renderCalendar(currentCalendarDate);
     }
@@ -331,47 +458,4 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstDayOfMonth = new Date(year, month, 1);
         const lastDayOfMonth = new Date(year, month + 1, 0);
         const startDate = new Date(firstDayOfMonth);
-        startDate.setDate(firstDayOfMonth.getDate() - firstDayOfMonth.getDay());
-        
-        let day = new Date(startDate);
-        while (day <= lastDayOfMonth || day.getDay() !== 0) {
-            const dayEl = document.createElement('div');
-            dayEl.className = 'calendar-day';
-            if (day.getMonth() !== month) {
-                dayEl.classList.add('not-current-month');
-            }
-
-            const dayNumberEl = document.createElement('div');
-            dayNumberEl.className = 'day-number';
-            dayNumberEl.textContent = day.getDate();
-            dayEl.appendChild(dayNumberEl);
-
-            const formattedDate = day.toISOString().split('T')[0];
-            const stampsForDay = appData.stamps[formattedDate] || [];
-            stampsForDay.forEach(stamp => {
-                const stampItemEl = document.createElement('div');
-                stampItemEl.className = 'stamp-item';
-                stampItemEl.textContent = stamp.text;
-                dayEl.appendChild(stampItemEl);
-            });
-
-            calendarGridEl.appendChild(dayEl);
-            day.setDate(day.getDate() + 1);
-        }
-    }
-
-    prevMonthBtn.addEventListener('click', () => {
-        currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
-        renderCalendar(currentCalendarDate);
-    });
-
-    nextMonthBtn.addEventListener('click', () => {
-        currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
-        renderCalendar(currentCalendarDate);
-    });
-
-    // --- 初期化処理 ---
-    loadData();
-    initializeStampPage();
-    showPage('stamp');
-});
+        startDate.setDate(firstDayOfMonth.getDate() - firstDayOfMonth
