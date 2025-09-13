@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 5000, rewardPoints: 8000 },
 };
 
-    // DOM要素のキャッシュ
+    / DOM要素のキャッシュ
     const navLinks = document.querySelectorAll('.nav-menu a');
     const pages = document.querySelectorAll('.page');
     const totalPointsDisplay_stamp = document.getElementById('totalPointsDisplay_stamp');
