@@ -311,22 +311,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLevelUpClick(event) {
-        const charId = parseInt(event.target.dataset.characterId, 10);
-        const characterToUpdate = appData.characters.find(c => c.id === charId);
-        const requiredPoints = (characterToUpdate.level + 1) * 58;
-        
-        if (appData.totalPoints >= requiredPoints) {
-            appData.totalPoints -= requiredPoints;
-            characterToUpdate.level++;
-            
-            saveData();
-            updatePointDisplay();
-            renderCharacters();
-        } else {
-            alert('ポイントが足りません！');
-        }
-    }
+    const charId = parseInt(event.target.dataset.characterId, 10);
+    const characterToUpdate = appData.characters.find(c => c.id === charId);
+    
+    // レベルアップに必要なポイントを計算
+    const requiredPoints = (characterToUpdate.level + 1) * 8;
+    
+    // --- 🔍 デバッグ用コード ---
+    console.log(`現在のレベル: ${characterToUpdate.level}`);
+    console.log(`次のレベル: ${characterToUpdate.level + 1}`);
+    console.log(`必要ポイント: ${requiredPoints}`);
+    console.log(`所持ポイント: ${appData.totalPoints}`);
+    // -------------------------
 
+    if (appData.totalPoints >= requiredPoints) {
+        appData.totalPoints -= requiredPoints;
+        characterToUpdate.level++;
+        
+        saveData();
+        updatePointDisplay();
+        renderCharacters();
+    } else {
+        alert('ポイントが足りません！');
+    }
+}
     function handleEvolveClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
