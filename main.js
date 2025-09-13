@@ -209,24 +209,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ページ2: キャラクター機能 ---
     function initializeCharacterPage() {
-        loadData();
-        const existingCharacterIds = appData.characters.map(c => c.id);
-        if (appData.characters.length < 3) {
-            for (let i = 1; i <= 3; i++) {
-                if (!existingCharacterIds.includes(i)) {
-                    appData.characters.push({
-                        id: i,
-                        level: 1,
-                        evolutionIndex: 0
-                    });
-                    break;
-                }
-            }
+    loadData();
+    const allCharacterIds = Object.keys(CHARACTER_MASTER_DATA).map(Number);
+    const existingCharacterIds = appData.characters.map(c => c.id);
+    
+    // まだ持っていないキャラクターを全て追加
+    allCharacterIds.forEach(charId => {
+        if (!existingCharacterIds.includes(charId)) {
+            appData.characters.push({
+                id: charId,
+                level: 1,
+                evolutionIndex: 0
+            });
         }
-        saveData();
-        updatePointDisplay();
-        renderCharacters();
-    }
+    });
+
+    saveData();
+    updatePointDisplay();
+    renderCharacters();
+}
 
     function renderCharacters() {
         characterListContainerEl.innerHTML = '';
