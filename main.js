@@ -100,6 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearRewardEl = document.getElementById('clearReward');
     const nextStageButtonEl = document.getElementById('nextStageButton');
 
+    // ★追加: スタンプ詳細ポップアップ用のDOM要素
+    const stampDetailModal = document.getElementById('stamp-detail-modal');
+    const stampDetailDateEl = document.getElementById('stamp-detail-date');
+    const stampDetailListEl = document.getElementById('stamp-detail-list');
+    const stampDetailClose = document.getElementsByClassName('detail-modal-close')[0];
+
+
     function saveData() {
         localStorage.setItem('studyApp', JSON.stringify(appData));
     }
@@ -250,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 8;
+            const requiredPoints = (charData.level + 1) * 58;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const canEvolve = isMaxLevel && master.evolutions[charData.evolutionIndex + 1];
@@ -311,30 +318,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLevelUpClick(event) {
-    const charId = parseInt(event.target.dataset.characterId, 10);
-    const characterToUpdate = appData.characters.find(c => c.id === charId);
-    
-    // レベルアップに必要なポイントを計算
-    const requiredPoints = (characterToUpdate.level + 1) * 8;
-    
-    // --- 🔍 デバッグ用コード ---
-    console.log(`現在のレベル: ${characterToUpdate.level}`);
-    console.log(`次のレベル: ${characterToUpdate.level + 1}`);
-    console.log(`必要ポイント: ${requiredPoints}`);
-    console.log(`所持ポイント: ${appData.totalPoints}`);
-    // -------------------------
-
-    if (appData.totalPoints >= requiredPoints) {
-        appData.totalPoints -= requiredPoints;
-        characterToUpdate.level++;
+        const charId = parseInt(event.target.dataset.characterId, 10);
+        const characterToUpdate = appData.characters.find(c => c.id === charId);
+        const requiredPoints = (characterToUpdate.level + 1) * 58;
         
-        saveData();
-        updatePointDisplay();
-        renderCharacters();
-    } else {
-        alert('ポイントが足りません！');
+        if (appData.totalPoints >= requiredPoints) {
+            appData.totalPoints -= requiredPoints;
+            characterToUpdate.level++;
+            
+            saveData();
+            updatePointDisplay();
+            renderCharacters();
+        } else {
+            alert('ポイントが足りません！');
+        }
     }
-}
+
     function handleEvolveClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
@@ -510,13 +509,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (day.getMonth() !== month) {
                 dayEl.classList.add('not-current-month');
             }
+            
+            // ★追加: クリックイベントと日付データの追加
+            const formattedDate = day.toISOString().split('T')[0];
+            dayEl.dataset.date = formattedDate;
 
             const dayNumberEl = document.createElement('div');
             dayNumberEl.className = 'day-number';
             dayNumberEl.textContent = day.getDate();
             dayEl.appendChild(dayNumberEl);
 
-            const formattedDate = day.toISOString().split('T')[0];
             const stampsForDay = appData.stamps[formattedDate] || [];
             stampsForDay.forEach(stamp => {
                 const stampItemEl = document.createElement('div');
@@ -525,10 +527,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayEl.appendChild(stampItemEl);
             });
 
+            // ★追加: クリックイベントリスナー
+            dayEl.addEventListener('click', () => showStampDetail(formattedDate));
+
             calendarGridEl.appendChild(dayEl);
             day.setDate(day.getDate() + 1);
         }
     }
+    
+    // ★追加: スタンプ詳細ポップアップ表示関数
+    function showStampDetail(date) {
+        const stamps = appData.stamps[date] || [];
+        
+        stampDetailDateEl.textContent = date;
+        stampDetailListEl.innerHTML = '';
+        
+        if (stamps.length > 0) {
+            stamps.forEach(stamp => {
+                const li = document.createElement('li');
+                li.textContent = stamp.text;
+                stampDetailListEl.appendChild(li);
+            });
+        } else {
+            const li = document.createElement('li');
+            li.textContent = 'この日のスタンプはありません。';
+            stampDetailListEl.appendChild(li);
+        }
+        
+        stampDetailModal.style.display = 'flex';
+    }
+    
+    // ★追加: ポップアップを閉じるイベント
+    stampDetailClose.onclick = () => {
+        stampDetailModal.style.display = 'none';
+    }
+
+    stampDetailModal.onclick = (event) => {
+        if (event.target === stampDetailModal) {
+            stampDetailModal.style.display = 'none';
+        }
+    }
+
 
     prevMonthBtn.addEventListener('click', () => {
         currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
