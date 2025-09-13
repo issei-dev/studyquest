@@ -15,53 +15,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const CHARACTER_MASTER_DATA = {
         1: {
             evolutions: [
-                { name: "コドラン", image: "images-001a.png", rank: "N★", initialAttack: 10, maxLevel: 20 },
-                { name: "フレイムドラゴン", image: "images-001b.png", rank: "R★★", initialAttack: 25, maxLevel: 30 },
-                { name: "インフェルノドラゴ", image: "images-001c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
+                { name: "コドラン", image: "images/images-001a.png", rank: "N★", initialAttack: 10, maxLevel: 20 },
+                { name: "フレイムドラゴン", image: "images/images-001b.png", rank: "R★★", initialAttack: 25, maxLevel: 30 },
+                { name: "インフェルノドラゴ", image: "images/images-001c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
             ]
         },
         2: {
             evolutions: [
-                { name: "プティスカル", image: "images-002a.png", rank: "N★", initialAttack: 8, maxLevel: 20 },
-                { name: "デスボーン", image: "images-002b.png", rank: "R★★", initialAttack: 30, maxLevel: 30 },
-                { name: "ナイトメアボーン", image: "images-002c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
+                { name: "プティスカル", image: "images/images-002a.png", rank: "N★", initialAttack: 8, maxLevel: 20 },
+                { name: "デスボーン", image: "images/images-002b.png", rank: "R★★", initialAttack: 30, maxLevel: 30 },
+                { name: "ナイトメアボーン", image: "images/images-002c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
             ]
         },
         3: {
             evolutions: [
-                { name: "ミストル", image: "images-003a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
-                { name: "アクアソーサラー", image: "images-003b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
+                { name: "ミストル", image: "images/images-003a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
+                { name: "アクアソーサラー", image: "images/images-003b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
             ]
         },
         4: {
             evolutions: [
-                { name: "クウ", image: "images-004a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
-                { name: "クウザ", image: "images-004b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
+                { name: "クウ", image: "images/images-004a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
+                { name: "クウザ", image: "images/images-004b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
             ]
         },
         5: {
             evolutions: [
-                { name: "ラン", image: "images-005a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
-                { name: "ランガ", image: "images-005b.png", rank: "R★★", initialAttack: 20, maxLevel: 30},
-                { name: "ライランガ", image: "images-005c.png", rank: "SR★★★", initialAttack: 85, maxLevel: 50},
+                { name: "ラン", image: "images/images-005a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
+                { name: "ランガ", image: "images/images-005b.png", rank: "R★★", initialAttack: 20, maxLevel: 30},
+                { name: "ライランガ", image: "images/images-005c.png", rank: "SR★★★", initialAttack: 85, maxLevel: 50},
             ]
-        }
+        },
         6: {
             evolutions: [
-                { name: "ヴァルキリー", image: "images-006a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
-                { name: "ヴァルキリー・ナイト", image: "images-006b.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
-                { name: "ヴァルキリー・アーク", image: "images-006c.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
-                { name: "ヴァルキリー・アークエンジェル", image: "images-006c.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
+                { name: "ヴァルキリー", image: "images/images-006a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
+                { name: "ヴァルキリー・ナイト", image: "images/images-006b.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
+                { name: "ヴァルキリー・アーク", image: "images/images-006c.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
+                { name: "ヴァルキリー・アークエンジェル", image: "images/images-006c.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
             ]
         }
     };
 
     const BOSS_MASTER_DATA = {
-        1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 3000 },
-        2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 3000, rewardPoints: 5000 },
-        3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 5000, rewardPoints: 8000 },
+        1: { name: "ブレインドッグ・ブルド", image: "images/images-B001.png", maxHp: 1000, rewardPoints: 3000 },
+        2: { name: "ブレインドッグ・スフィアス", image: "images/images-B002.png", maxHp: 3000, rewardPoints: 5000 },
+        3: { name: "ブレインドッグ・ドゥクス", image: "images/images-B003.png", maxHp: 5000, rewardPoints: 8000 },
     };
-
+    
     // DOM要素のキャッシュ
     const navLinks = document.querySelectorAll('.nav-menu a');
     const pages = document.querySelectorAll('.page');
@@ -217,25 +217,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ページ2: キャラクター機能 ---
     function initializeCharacterPage() {
-    loadData();
-    const allCharacterIds = Object.keys(CHARACTER_MASTER_DATA).map(Number);
-    const existingCharacterIds = appData.characters.map(c => c.id);
-    
-    // まだ持っていないキャラクターを全て追加
-    allCharacterIds.forEach(charId => {
-        if (!existingCharacterIds.includes(charId)) {
-            appData.characters.push({
-                id: charId,
-                level: 1,
-                evolutionIndex: 0
-            });
-        }
-    });
+        loadData();
+        const allCharacterIds = Object.keys(CHARACTER_MASTER_DATA).map(Number);
+        const existingCharacterIds = appData.characters.map(c => c.id);
+        
+        allCharacterIds.forEach(charId => {
+            if (!existingCharacterIds.includes(charId)) {
+                appData.characters.push({
+                    id: charId,
+                    level: 1,
+                    evolutionIndex: 0
+                });
+            }
+        });
 
-    saveData();
-    updatePointDisplay();
-    renderCharacters();
-}
+        saveData();
+        updatePointDisplay();
+        renderCharacters();
+    }
 
     function renderCharacters() {
         characterListContainerEl.innerHTML = '';
@@ -254,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const requiredPoints = (charData.level + 1) * 58;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
-            const canEvolve = isMaxLevel;
+            const canEvolve = isMaxLevel && master.evolutions[charData.evolutionIndex + 1];
 
             const card = document.createElement('div');
             card.className = 'card character-card';
@@ -265,8 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>攻撃力: ${attackPower}</p>
                 ${!isMaxLevel ? `<p>次のレベルまで: ${requiredPoints} P</p>` : `<p>この形態は最大レベルです！</p>`}
                 
-                ${isMaxLevel && master.evolutions[charData.evolutionIndex + 1]
-                    ? `<button class="evolve-button" data-character-id="${charData.id}" ${canEvolve ? '' : 'disabled'}>進化する！</button>`
+                ${canEvolve
+                    ? `<button class="evolve-button" data-character-id="${charData.id}">進化する！</button>`
                     : `<button class="level-up-button" data-character-id="${charData.id}" ${canLevelUp ? '' : 'disabled'}>レベルアップ！</button>`
                 }
             `;
@@ -287,10 +286,12 @@ document.addEventListener('DOMContentLoaded', () => {
             image.addEventListener('click', handleImageClick);
         });
 
-        if (appData.characters.length < 3) {
-            characterHintEl.textContent = 'キャラクターを30レベルにすると、新しいキャラクターが追加できます！';
-        } else {
+        const allCharactersOwned = appData.characters.length === Object.keys(CHARACTER_MASTER_DATA).length;
+        if (allCharactersOwned) {
             characterHintEl.textContent = 'すべてのキャラクターが揃っています！';
+        } else {
+            const nextCharacterLevel = 30; // 任意のレベル
+            characterHintEl.textContent = `キャラクターを${nextCharacterLevel}レベルにすると、新しいキャラクターが追加できます！`;
         }
     }
 
@@ -312,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleLevelUpClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
-        const requiredPoints = (characterToUpdate.level + 1) * 8;
+        const requiredPoints = (characterToUpdate.level + 1) * 58;
         
         if (appData.totalPoints >= requiredPoints) {
             appData.totalPoints -= requiredPoints;
@@ -327,49 +328,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleEvolveClick(event) {
-    const charId = parseInt(event.target.dataset.characterId, 10);
-    const characterToUpdate = appData.characters.find(c => c.id === charId);
-    
-    if (!characterToUpdate) return;
-    
-    const master = CHARACTER_MASTER_DATA[characterToUpdate.id];
-    const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
-    
-    if (master.evolutions[nextEvolutionIndex]) {
-        // 進化エフェクトの適用
-        const characterImage = event.target.closest('.character-card').querySelector('img');
-        if (characterImage) {
-            characterImage.classList.add('evolve-effect');
-        }
-
-        characterToUpdate.evolutionIndex = nextEvolutionIndex;
-        characterToUpdate.level = 1;
+        const charId = parseInt(event.target.dataset.characterId, 10);
+        const characterToUpdate = appData.characters.find(c => c.id === charId);
         
-        alert('おめでとう！キャラクターが進化したよ！');
+        if (!characterToUpdate) return;
         
-        saveData();
-        updatePointDisplay();
-
-        // アニメーションが完了するのを待ってからカードを再描画する
-        setTimeout(() => {
-            // アニメーションをリセット
+        const master = CHARACTER_MASTER_DATA[characterToUpdate.id];
+        const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
+        
+        if (master.evolutions[nextEvolutionIndex]) {
+            const characterImage = event.target.closest('.character-card').querySelector('img');
             if (characterImage) {
-                characterImage.classList.remove('evolve-effect');
+                characterImage.classList.add('evolve-effect');
             }
-            renderCharacters();
-        }, 1500); 
-        
-    } else {
-        alert('このキャラクターはこれ以上進化できません！');
+
+            characterToUpdate.evolutionIndex = nextEvolutionIndex;
+            characterToUpdate.level = 1;
+            
+            alert('おめでとう！キャラクターが進化したよ！');
+            
+            saveData();
+            updatePointDisplay();
+
+            setTimeout(() => {
+                if (characterImage) {
+                    characterImage.classList.remove('evolve-effect');
+                }
+                renderCharacters();
+            }, 1500); 
+            
+        } else {
+            alert('このキャラクターはこれ以上進化できません！');
+        }
     }
-}
 
     // --- ページ3: ボス機能 ---
     function initializeBossPage() {
         loadData();
         const today = new Date().toISOString().split('T')[0];
 
-        // 日付が変わったら攻撃回数をリセット
         if (appData.boss.lastAttackDate !== today) {
             appData.boss.attacksLeftToday = 3;
             appData.boss.lastAttackDate = today;
@@ -438,10 +435,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalAttack = calculateTotalAttackPower();
         const currentBossData = BOSS_MASTER_DATA[appData.boss.currentStage];
         
-        // ボス画像の揺れアニメーション
         bossImageEl.classList.add('shake');
         
-        // ダメージ計算と攻撃回数の消費
         appData.boss.currentHp -= totalAttack;
         appData.boss.attacksLeftToday--;
 
@@ -449,17 +444,14 @@ document.addEventListener('DOMContentLoaded', () => {
             appData.boss.currentHp = 0;
         }
 
-        // データ保存とUI更新
         saveData();
         renderBossStatus();
         checkAttackButtonState();
 
-        // アニメーション終了後にクラスを削除
         bossImageEl.addEventListener('animationend', () => {
             bossImageEl.classList.remove('shake');
         }, { once: true });
 
-        // HPが0になったかチェック
         if (appData.boss.currentHp <= 0) {
             setTimeout(() => {
                 showClearModal(currentBossData.rewardPoints);
