@@ -319,40 +319,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleEvolveClick(event) {
-        const charId = parseInt(event.target.dataset.characterId, 10);
-        const characterToUpdate = appData.characters.find(c => c.id === charId);
-        
-        if (!characterToUpdate) return;
-        
-        const master = CHARACTER_MASTER_DATA[characterToUpdate.id];
-        const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
-        
-        if (master.evolutions[nextEvolutionIndex]) {
-            // 進化エフェクトの適用と解除
-            const characterImage = event.target.closest('.character-card').querySelector('img');
-            if (characterImage) {
-                characterImage.classList.add('evolve-effect');
-                // アニメーション終了後にクラスを削除
-                characterImage.addEventListener('animationend', function handler() {
-                    characterImage.classList.remove('evolve-effect');
-                    characterImage.removeEventListener('animationend', handler);
-                    
-                    // アニメーション後にキャラクターの見た目を更新するためにrenderCharactersを呼び出す
-                    renderCharacters();
-                });
-            }
-
-            characterToUpdate.evolutionIndex = nextEvolutionIndex;
-            characterToUpdate.level = 1;
-            
-            alert('おめでとう！キャラクターが進化したよ！');
-            
-            saveData();
-            updatePointDisplay();
-        } else {
-            alert('このキャラクターはこれ以上進化できません！');
+    const charId = parseInt(event.target.dataset.characterId, 10);
+    const characterToUpdate = appData.characters.find(c => c.id === charId);
+    
+    if (!characterToUpdate) return;
+    
+    const master = CHARACTER_MASTER_DATA[characterToUpdate.id];
+    const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
+    
+    if (master.evolutions[nextEvolutionIndex]) {
+        // 進化エフェクトの適用と解除
+        const characterImage = event.target.closest('.character-card').querySelector('img');
+        if (characterImage) {
+            characterImage.classList.add('evolve-effect');
         }
+
+        characterToUpdate.evolutionIndex = nextEvolutionIndex;
+        characterToUpdate.level = 1;
+        
+        alert('おめでとう！キャラクターが進化したよ！');
+        
+        saveData();
+        updatePointDisplay();
+
+        // エフェクト終了後にキャラクターカードを再描画
+        setTimeout(() => {
+            renderCharacters();
+        }, 1500); // アニメーションの秒数に合わせて調整
+        
+    } else {
+        alert('このキャラクターはこれ以上進化できません！');
     }
+}
 
     // --- ページ3: ボス機能 ---
     function initializeBossPage() {
