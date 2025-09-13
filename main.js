@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextEvolutionIndex = characterToUpdate.evolutionIndex + 1;
     
     if (master.evolutions[nextEvolutionIndex]) {
-        // 進化エフェクトの適用と解除
+        // 進化エフェクトの適用
         const characterImage = event.target.closest('.character-card').querySelector('img');
         if (characterImage) {
             characterImage.classList.add('evolve-effect');
@@ -350,10 +350,14 @@ document.addEventListener('DOMContentLoaded', () => {
         saveData();
         updatePointDisplay();
 
-        // エフェクト終了後にキャラクターカードを再描画
+        // アニメーションが完了するのを待ってからカードを再描画する
         setTimeout(() => {
+            // アニメーションをリセット
+            if (characterImage) {
+                characterImage.classList.remove('evolve-effect');
+            }
             renderCharacters();
-        }, 1500); // アニメーションの秒数に合わせて調整
+        }, 1500); 
         
     } else {
         alert('このキャラクターはこれ以上進化できません！');
