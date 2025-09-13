@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleLevelUpClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
-        const requiredPoints = (characterToUpdate.level + 1) * 58;
+        const requiredPoints = (characterToUpdate.level + 1) * 8;
         
         if (appData.totalPoints >= requiredPoints) {
             appData.totalPoints -= requiredPoints;
