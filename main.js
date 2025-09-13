@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         6: {
             evolutions: [
-                { name: "ヴァルキリー", image: "images-006a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
-                { name: "ヴァルキリー・ナイト", image: "images-006b.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
-                { name: "ヴァルキリー・アーク", image: "images-006c.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
-                { name: "ヴァルキリー・アークエンジェル", image: "images-006c.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
+                { name: "ヴァルキリー", image: "images-006b.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
+                { name: "ヴァルキリー・ナイト", image: "images-006c.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
+                { name: "ヴァルキリー・アーク", image: "images-006d.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
+                { name: "ヴァルキリー・アークエンジェル", image: "images-006e.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
             ]
         }
     };
