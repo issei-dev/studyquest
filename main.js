@@ -15,35 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const CHARACTER_MASTER_DATA = {
         1: {
             evolutions: [
-                { name: "コドラン", image: "images-001a.png", rank: "Normal", initialAttack: 10, maxLevel: 20 },
-                { name: "フレイムドラゴン", image: "images-001b.png", rank: "Rare", initialAttack: 25, maxLevel: 30 },
-                { name: "インフェルノドラゴ", image: "images-001c.png", rank: "Super Rare", initialAttack: 80, maxLevel: 50 },
+                { name: "コドラン", image: "images-001a.png", rank: "N★", initialAttack: 10, maxLevel: 20 },
+                { name: "フレイムドラゴン", image: "images-001b.png", rank: "R★★", initialAttack: 25, maxLevel: 30 },
+                { name: "インフェルノドラゴ", image: "images-001c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
             ]
         },
         2: {
             evolutions: [
-                { name: "プティスカル", image: "images-002a.png", rank: "Normal", initialAttack: 8, maxLevel: 20 },
-                { name: "デスボーン", image: "images-002b.png", rank: "Rare", initialAttack: 30, maxLevel: 30 },
-                { name: "ナイトメアボーン", image: "images-002c.png", rank: "Super Rare", initialAttack: 80, maxLevel: 50 },
+                { name: "プティスカル", image: "images-002a.png", rank: "N★", initialAttack: 8, maxLevel: 20 },
+                { name: "デスボーン", image: "images-002b.png", rank: "R★★", initialAttack: 30, maxLevel: 30 },
+                { name: "ナイトメアボーン", image: "images-002c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
             ]
         },
         3: {
             evolutions: [
-                { name: "ミストル", image: "images-003a.png", rank: "Rare", initialAttack: 20, maxLevel: 30 },
-                { name: "アクアソーサラー", image: "images-003b.png", rank: "Super Rare", initialAttack: 65, maxLevel: 50},
+                { name: "ミストル", image: "images-003a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
+                { name: "アクアソーサラー", image: "images-003b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
             ]
         },
         4: {
             evolutions: [
-                { name: "クウ", image: "images-004a.png", rank: "Rare", initialAttack: 20, maxLevel: 30 },
-                { name: "クウザ", image: "images-004b.png", rank: "Super Rare", initialAttack: 65, maxLevel: 50},
+                { name: "クウ", image: "images-004a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
+                { name: "クウザ", image: "images-004b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
             ]
         },
         5: {
             evolutions: [
-                { name: "ラン", image: "images-005a.png", rank: "Normal", initialAttack: 5, maxLevel: 20 },
-                { name: "ランガ", image: "images-005b.png", rank: "Rare", initialAttack: 20, maxLevel: 30},
-                { name: "ライランガ", image: "images-005c.png", rank: "Super Rare", initialAttack: 85, maxLevel: 50},
+                { name: "ラン", image: "images-005a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
+                { name: "ランガ", image: "images-005b.png", rank: "R★★", initialAttack: 20, maxLevel: 30},
+                { name: "ライランガ", image: "images-005c.png", rank: "SR★★★", initialAttack: 85, maxLevel: 50},
             ]
         }
     };
