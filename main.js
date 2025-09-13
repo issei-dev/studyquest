@@ -56,6 +56,49 @@ document.addEventListener('DOMContentLoaded', () => {
     3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 5000, rewardPoints: 8000 },
 };
 
+    document.addEventListener('DOMContentLoaded', () => {
+
+    let appData = {
+        totalPoints: 0,
+        characters: [],
+        stamps: {},
+        boss: {
+            currentStage: 1,
+            lastAttackDate: null,
+            currentHp: 0,
+            attacksLeftToday: 3
+        }
+    };
+
+    const CHARACTER_MASTER_DATA = {
+        1: {
+            evolutions: [
+                { name: "コドラン", image: "images/images-001a.png", rank: "Normal", initialAttack: 10, maxLevel: 20 },
+                { name: "フレイムドラゴン", image: "images/images-001b.png", rank: "Rare", initialAttack: 25, maxLevel: 30 },
+                { name: "インフェルノドラゴ", image: "images/images-001c.png", rank: "Super Rare", initialAttack: 80, maxLevel: 50 },
+            ]
+        },
+        2: {
+            evolutions: [
+                { name: "プティスカル", image: "images/images-002a.png", rank: "Normal", initialAttack: 8, maxLevel: 20 },
+                { name: "デスボーン", image: "images/images-002b.png", rank: "Rare", initialAttack: 30, maxLevel: 30 },
+                { name: "ナイトメアボーン", image: "images/images-002c.png", rank: "Super Rare", initialAttack: 80, maxLevel: 50 },
+            ]
+        },
+        3: {
+            evolutions: [
+                { name: "ミストル", image: "images/images-003a.png", rank: "Rare", initialAttack: 20, maxLevel: 30 },
+                { name: "アクアソーサラー", image: "images/images-003b.png", rank: "Super Rare", initialAttack: 65, maxLevel: 50},
+            ]
+        }
+    };
+
+    const BOSS_MASTER_DATA = {
+        1: { name: "ブレインドッグ・ブルド", image: "images/images-B001.png", maxHp: 1000, rewardPoints: 5000 },
+        2: { name: "ブレインドッグ・スフィアス", image: "images/images-B002.png", maxHp: 3000, rewardPoints: 10000 },
+        3: { name: "オーガ", image: "images/boss_ogre.png", maxHp: 5000, rewardPoints: 2000 },
+    };
+
     // DOM要素のキャッシュ
     const navLinks = document.querySelectorAll('.nav-menu a');
     const pages = document.querySelectorAll('.page');
