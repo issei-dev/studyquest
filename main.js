@@ -15,51 +15,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const CHARACTER_MASTER_DATA = {
         1: {
             evolutions: [
-                { name: "コドラン", image: "images/images-001a.png", rank: "N★", initialAttack: 10, maxLevel: 20 },
-                { name: "フレイムドラゴン", image: "images/images-001b.png", rank: "R★★", initialAttack: 25, maxLevel: 30 },
-                { name: "インフェルノドラゴ", image: "images/images-001c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
+                { name: "コドラン", image: "images-001a.png", rank: "N★", initialAttack: 10, maxLevel: 20 },
+                { name: "フレイムドラゴン", image: "images-001b.png", rank: "R★★", initialAttack: 25, maxLevel: 30 },
+                { name: "インフェルノドラゴ", image: "images-001c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
             ]
         },
         2: {
             evolutions: [
-                { name: "プティスカル", image: "images/images-002a.png", rank: "N★", initialAttack: 8, maxLevel: 20 },
-                { name: "デスボーン", image: "images/images-002b.png", rank: "R★★", initialAttack: 30, maxLevel: 30 },
-                { name: "ナイトメアボーン", image: "images/images-002c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
+                { name: "プティスカル", image: "images-002a.png", rank: "N★", initialAttack: 8, maxLevel: 20 },
+                { name: "デスボーン", image: "images-002b.png", rank: "R★★", initialAttack: 30, maxLevel: 30 },
+                { name: "ナイトメアボーン", image: "images-002c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
             ]
         },
         3: {
             evolutions: [
-                { name: "ミストル", image: "images/images-003a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
-                { name: "アクアソーサラー", image: "images/images-003b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
+                { name: "ミストル", image: "images-003a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
+                { name: "アクアソーサラー", image: "images-003b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
             ]
         },
         4: {
             evolutions: [
-                { name: "クウ", image: "images/images-004a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
-                { name: "クウザ", image: "images/images-004b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
+                { name: "クウ", image: "images-004a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
+                { name: "クウザ", image: "images-004b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
             ]
         },
         5: {
             evolutions: [
-                { name: "ラン", image: "images/images-005a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
-                { name: "ランガ", image: "images/images-005b.png", rank: "R★★", initialAttack: 20, maxLevel: 30},
-                { name: "ライランガ", image: "images/images-005c.png", rank: "SR★★★", initialAttack: 85, maxLevel: 50},
+                { name: "ラン", image: "images-005a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
+                { name: "ランガ", image: "images-005b.png", rank: "R★★", initialAttack: 20, maxLevel: 30},
+                { name: "ライランガ", image: "images-005c.png", rank: "SR★★★", initialAttack: 85, maxLevel: 50},
             ]
         },
         6: {
             evolutions: [
-                { name: "ヴァルキリー", image: "images/images-006a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
-                { name: "ヴァルキリー・ナイト", image: "images/images-006b.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
-                { name: "ヴァルキリー・アーク", image: "images/images-006c.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
-                { name: "ヴァルキリー・アークエンジェル", image: "images/images-006c.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
+                { name: "ヴァルキリー", image: "images-006a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
+                { name: "ヴァルキリー・ナイト", image: "images-006b.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
+                { name: "ヴァルキリー・アーク", image: "images-006c.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
+                { name: "ヴァルキリー・アークエンジェル", image: "images-006c.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
             ]
         }
     };
 
     const BOSS_MASTER_DATA = {
-        1: { name: "ブレインドッグ・ブルド", image: "images/images-B001.png", maxHp: 1000, rewardPoints: 3000 },
-        2: { name: "ブレインドッグ・スフィアス", image: "images/images-B002.png", maxHp: 3000, rewardPoints: 5000 },
-        3: { name: "ブレインドッグ・ドゥクス", image: "images/images-B003.png", maxHp: 5000, rewardPoints: 8000 },
+        1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 3000 },
+        2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 3000, rewardPoints: 5000 },
+        3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 5000, rewardPoints: 8000 },
     };
     
     // DOM要素のキャッシュ
