@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>データのクリア</title>
+</head>
+<body>
+    <h1>データをクリアしています...</h1>
+    <script>
+        // localStorageから'studyApp'という名前のデータを削除
+        localStorage.removeItem('studyApp');
+        
+        // データの削除が完了したことを通知
+        alert('アプリのデータをクリアしました！');
+        
+        // 元のアプリのページに戻る
+        window.location.href = 'index.html';
+    </script>
+</body>
+</html>
