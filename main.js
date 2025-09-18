@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const BOSS_MASTER_DATA = {
         1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 3000 },
-        2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 3000, rewardPoints: 5000 },
-        3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 5000, rewardPoints: 8000 },
+        2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 10000, rewardPoints: 5000 },
+        3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 30000, rewardPoints: 8000 },
     };
     
     // DOM要素のキャッシュ
