@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const attackPower = currentEvolution.initialAttack * charData.level;
             totalAttackPower += attackPower;
             
-            const requiredPoints = (charData.level + 1) * 58;
+            const requiredPoints = (charData.level + 1) * 5;
             const canLevelUp = appData.totalPoints >= requiredPoints && !isMaxLevel;
             
             const canEvolve = isMaxLevel && master.evolutions[charData.evolutionIndex + 1];
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleLevelUpClick(event) {
         const charId = parseInt(event.target.dataset.characterId, 10);
         const characterToUpdate = appData.characters.find(c => c.id === charId);
-        const requiredPoints = (characterToUpdate.level + 1) * 58;
+        const requiredPoints = (characterToUpdate.level + 1) * 5;
         
         if (appData.totalPoints >= requiredPoints) {
             appData.totalPoints -= requiredPoints;
