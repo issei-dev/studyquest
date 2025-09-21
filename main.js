@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
         1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 3000 },
         2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 10000, rewardPoints: 5000 },
         3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 50000, rewardPoints: 8000 },
+        4: { name: "リヴァ", image: "images-B004.png", maxHp: 50000, rewardPoints: 5000 },
+        5: { name: "リヴァス", image: "images-B005.png", maxHp: 100000, rewardPoints: 5000 },
     };
     
     // DOM要素のキャッシュ
