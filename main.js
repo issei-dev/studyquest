@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         1: { name: "ブレインドッグ・ブルド", image: "images-B001.png", maxHp: 1000, rewardPoints: 3000 },
         2: { name: "ブレインドッグ・スフィアス", image: "images-B002.png", maxHp: 10000, rewardPoints: 5000 },
         3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 50000, rewardPoints: 6000 },
-        4: { name: "リヴァシス", image: "images-007c.png", maxHp: 100000, rewardPoints: 65000 },
+        4: { name: "リヴァシス", image: "images-007c.png", maxHp: 100000, rewardPoints: 6500 },
         5: { name: "Tung Tung Tung Sahur", image: "images-B004.png", maxHp: 150000, rewardPoints: 7000 },
     };
     
