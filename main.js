@@ -593,24 +593,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 初期化処理 ---
     loadData();
+// ボスのステージ番号を調整するロジック（恒久的な修正）
 const maxBossId = Math.max(...Object.keys(BOSS_MASTER_DATA).map(Number));
 
+// 既存のステージ番号がマスターデータの範囲外(最大値超え or 1未満)の場合は調整
 if (appData.boss.currentStage > maxBossId || appData.boss.currentStage < 1) {
-    // 既存のステージがマスターデータの範囲外(最大値超え or 1未満)の場合は調整
     appData.boss.currentStage = maxBossId;
     appData.boss.currentHp = 0; // 新しいボスのHPをリセット
     saveData();
-    console.log(`現在のステージをマスターデータの最大値 ${maxBossId} に調整しました。`);
+    console.log(`ステージ番号が範囲外だったため、マスターデータの最大値 ${maxBossId} に調整しました。`);
 } 
-// ※ すぐにステージ6から始めたい場合は、以下のブロックを一時的に有効にしてください
-/*
-else if (appData.boss.currentStage < 6) {
-    appData.boss.currentStage = 6;
-    appData.boss.currentHp = 0;
-    saveData();
-    console.log('ステージを6に強制移行しました。');
-}
-*/
+
 initializeStampPage();
 showPage('stamp');
 });
