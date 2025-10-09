@@ -593,23 +593,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 初期化処理 ---
     loadData();
-// 【修正点】ロードしたデータが古い場合や、新しいボスを追加した場合にステージを調整する
 const maxBossId = Math.max(...Object.keys(BOSS_MASTER_DATA).map(Number));
 
-if (appData.boss.currentStage > maxBossId) {
-    // データが最大ステージを超えている場合は、最大ステージに設定し直す
+if (appData.boss.currentStage > maxBossId || appData.boss.currentStage < 1) {
+    // 既存のステージがマスターデータの範囲外(最大値超え or 1未満)の場合は調整
     appData.boss.currentStage = maxBossId;
-    appData.boss.currentHp = 0; // 必要に応じてHPをリセット
+    appData.boss.currentHp = 0; // 新しいボスのHPをリセット
     saveData();
-} else if (appData.boss.currentStage < 6) {
-    // ※ 新しいボスをすぐにテストしたい場合、以下の行を追加・有効化してください
-    // appData.boss.currentStage = 6;
-    // appData.boss.currentHp = 0;
-    // saveData();
-    // alert('開発者モード: ステージを6に強制移行しました。');
+    console.log(`現在のステージをマスターデータの最大値 ${maxBossId} に調整しました。`);
 } 
-// ここまで追加 👆
-
+// ※ すぐにステージ6から始めたい場合は、以下のブロックを一時的に有効にしてください
+/*
+else if (appData.boss.currentStage < 6) {
+    appData.boss.currentStage = 6;
+    appData.boss.currentHp = 0;
+    saveData();
+    console.log('ステージを6に強制移行しました。');
+}
+*/
 initializeStampPage();
 showPage('stamp');
 });
