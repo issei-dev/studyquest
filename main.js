@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "コドラン", image: "images-001a.png", rank: "N★", initialAttack: 10, maxLevel: 20 },
                 { name: "フレイムドラゴン", image: "images-001b.png", rank: "R★★", initialAttack: 25, maxLevel: 30 },
                 { name: "インフェルノドラゴ", image: "images-001c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
+                 { name: "ヴォルカリオン", image: "images-001d.png", rank: "UR★★★★", initialAttack: 120, maxLevel: 70 },
             ]
         },
         2: {
@@ -25,18 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "プティスカル", image: "images-002a.png", rank: "N★", initialAttack: 8, maxLevel: 20 },
                 { name: "デスボーン", image: "images-002b.png", rank: "R★★", initialAttack: 30, maxLevel: 30 },
                 { name: "ナイトメアボーン", image: "images-002c.png", rank: "SR★★★", initialAttack: 80, maxLevel: 50 },
+                { name: "ダーク・ナイトメア・メネシス", image: "images-002d.png", rank: "UR★★★★", initialAttack: 135, maxLevel: 70 },
             ]
         },
         3: {
             evolutions: [
                 { name: "ミストル", image: "images-003a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
                 { name: "アクアソーサラー", image: "images-003b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
+                { name: "アクアドラゴン・ソーサラー", image: "images-003d.png", rank: "UR★★★★", initialAttack: 115, maxLevel: 70},
             ]
         },
         4: {
             evolutions: [
                 { name: "クウ", image: "images-004a.png", rank: "R★★", initialAttack: 20, maxLevel: 30 },
                 { name: "クウザ", image: "images-004b.png", rank: "SR★★★", initialAttack: 65, maxLevel: 50},
+            　　 { name: "クウザリオン", image: "images-004c.png", rank: "UR★★★★", initialAttack: 110, maxLevel: 70},
             ]
         },
         5: {
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "ヴァルキリー", image: "images-006b.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
                 { name: "ヴァルキリー・ナイト", image: "images-006c.png", rank: "R★★", initialAttack: 15, maxLevel: 30},
                 { name: "ヴァルキリー・アーク", image: "images-006d.png", rank: "SR★★★", initialAttack: 45, maxLevel: 50},
-                { name: "ヴァルキリー・アークエンジェル", image: "images-006e.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 50},
+                { name: "ヴァルキリー・アークエンジェル", image: "images-006e.png", rank: "UR★★★★", initialAttack: 90, maxLevel: 70},
             ]
         }
     };
@@ -62,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
         3: { name: "ブレインドッグ・ドゥクス", image: "images-B003.png", maxHp: 50000, rewardPoints: 6000 },
         4: { name: "リヴァシス", image: "images-007c.png", maxHp: 100000, rewardPoints: 6500 },
         5: { name: "Tung Tung Tung Sahur", image: "images-B004.png", maxHp: 150000, rewardPoints: 7000 },
+        6: { name: "Tralalero Tralala", image: "images-B005.png", maxHp: 30000, rewardPoints: 10000 },
+        7: { name: "Chimpanzini Bananini", image: "images-B006.png", maxHp: 777777, rewardPoints: 15000 },
+        8: { name: "Trippi Troppi", image: "images-B007.png", maxHp: 500000, rewardPoints: 12000 },
+        9: { name: "Brr Brr Patapim)", image: "images-B008.png", maxHp: 800000, rewardPoints: 15000 },
     };
     
     // DOM要素のキャッシュ
