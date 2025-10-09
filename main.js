@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "ラン", image: "images-005a.png", rank: "N★", initialAttack: 5, maxLevel: 20 },
                 { name: "ランガ", image: "images-005b.png", rank: "R★★", initialAttack: 20, maxLevel: 30},
                 { name: "ライランガ", image: "images-005c.png", rank: "SR★★★", initialAttack: 85, maxLevel: 50},
+                { name: "ヴォルトライガン", image: "images-005d.png", rank: "UR★★★★", initialAttack: 140, maxLevel: 70},
             ]
         },
         6: {
@@ -591,6 +592,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 初期化処理 ---
     loadData();
-    initializeStampPage();
-    showPage('stamp');
+// 【修正点】ロードしたデータが古い場合や、新しいボスを追加した場合にステージを調整する
+const maxBossId = Math.max(...Object.keys(BOSS_MASTER_DATA).map(Number));
+
+if (appData.boss.currentStage > maxBossId) {
+    // データが最大ステージを超えている場合は、最大ステージに設定し直す
+    appData.boss.currentStage = maxBossId;
+    appData.boss.currentHp = 0; // 必要に応じてHPをリセット
+    saveData();
+} else if (appData.boss.currentStage < 6) {
+    // ※ 新しいボスをすぐにテストしたい場合、以下の行を追加・有効化してください
+    // appData.boss.currentStage = 6;
+    // appData.boss.currentHp = 0;
+    // saveData();
+    // alert('開発者モード: ステージを6に強制移行しました。');
+} 
+// ここまで追加 👆
+
+initializeStampPage();
+showPage('stamp');
 });
